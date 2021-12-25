@@ -86,8 +86,29 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+              
+              <!-- Navbar dropdown -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="account"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Account
+                </a>
+                <!-- Dropdown menu -->
+                <ul class="dropdown-menu" aria-labelledby="account">
+                  {% if request.user.is_authenticated %}
+                    <a class="dropdown-item" href="{% url 'myapp:login' %}">{{ request.user }}</a>
+                    <a class="dropdown-item" href="{% url 'myapp:logout' %}">Sign Out</a>
+                  {% else %}
+                    <a class="dropdown-item" href="{% url 'myapp:login' %}">Sign In</a>
+                    <a class="dropdown-item" href="{% url 'myapp:login' %}">Sign Up</a>
+                  {% endif %}
+                </ul>
               </li>
             </ul>
             <form class="d-flex input-group w-auto">

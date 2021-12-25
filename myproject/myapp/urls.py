@@ -9,4 +9,6 @@ urlpatterns = [
     path('post_update/<int:pk>', views.PostUpdate.as_view(), name='post_update'),
     path('post_delete/<int:pk>', views.PostDelete.as_view(), name='post_delete'),
     path('post_list', views.PostList.as_view(), name='post_list'),
+    path('login', views.Login.as_view(), name='login'),
+    path('logout', views.Logout.as_view(), name='logout'),
 ]
