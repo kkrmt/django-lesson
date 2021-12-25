@@ -1,0 +1,29 @@
+{% extends 'myapp/base.html' %} {% block content %}
+
+<div class="row">
+  <div class="col-md-4">
+    <h2>Sign Up</h2>
+    <br />
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      {% for field in form %}
+        <div class="form-group">
+          <label>{{ field.label_tag }}</label>
+          {{ field }}
+          {% comment %} {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %} {% endcomment %}
+          {% for error in field.errors %}
+            <span style="color: red">{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="btn btn-success">Sign Up</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
