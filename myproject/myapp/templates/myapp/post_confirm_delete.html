@@ -1,0 +1,36 @@
+{% extends 'myapp/base.html' %} {% block content %}
+
+<div class="row">
+  <div class="col-md-9">
+    <h2>Post削除</h2>
+    <br />
+    <form method="post">
+      <div class="alert alert-danger" role="alert">
+        {% csrf_token %}
+        <p>以下の内容を本当に削除しますか？</p>
+      </div>
+      <input type="submit" class="btn btn-outline-danger" value="Delete" />
+    </form>
+    <br />
+    <br />
+
+    <div class="card col-md-5">
+      <img
+        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
+        class="card-img-top"
+        alt="Fissure in Sandstone"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ object.title }}</h5>
+        <p class="card-text">{{ object.content }}</p>
+        <a
+          href="{% url 'myapp:post_update' object.id %}"
+          class="btn btn-primary"
+          >Update</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

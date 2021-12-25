@@ -1,0 +1,34 @@
+{% extends 'myapp/base.html' %} {% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>一覧ページ</h2>
+    <br />
+    
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">タイトル</th>
+          <th scope="col">本文</th>
+          <th scope="col">作成日時</th>
+          <th scope="col">更新日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in post_list %}
+        <tr>
+          <th scope="row">{{ item.id }}</th>
+          <td><a href="{% url 'myapp:post_detail' item.pk %}">{{ item.title }}</a></td>
+          <td>{{ item.content }}</td>
+          <td>{{ item.created_at }}</td>
+          <td>{{ item.updated_at }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+{% endblock %}

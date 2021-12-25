@@ -1,0 +1,21 @@
+{% extends 'myapp/base.html' %} {% block content %}
+
+<div class="container row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <img
+        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
+        class="card-img-top"
+        alt="Fissure in Sandstone"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ object.title }}</h5>
+        <p class="card-text">{{ object.content }}</p>
+        <a href="{% url 'myapp:post_update' object.id %}" class="btn btn-primary">Update</a>
+        <a href="{% url 'myapp:post_delete' object.pk %}" class="btn btn-outline-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
