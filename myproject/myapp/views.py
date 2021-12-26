@@ -7,7 +7,14 @@ from .forms import PostForm, LoginForm, SignUpForm
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+# 自分のPostかどうか
+class OnlyMyPostMixin(UserPassesTestMixin):
+  raise_execption = True
+  def test_func(self):
+    post = Post.objects.get(id = self.kwargs['pk'])
+    return post.author == self.request.user
 
 class Index(TemplateView):
   template_name = 'myapp/index.html'
@@ -33,14 +40,14 @@ class PostCreate(LoginRequiredMixin, CreateView):
 class PostDetail(DetailView):
   model = Post
 
-class PostUpdate(LoginRequiredMixin, UpdateView):
+class PostUpdate(OnlyMyPostMixin, UpdateView):
   model = Post
   form_class = PostForm
   def get_success_url(self):
     messages.info(self.request, 'Postを更新しました')
     return resolve_url('myapp:post_detail', pk=self.kwargs['pk'])
 
-class PostDelete(LoginRequiredMixin, DeleteView):
+class PostDelete(OnlyMyPostMixin, DeleteView):
   model = Post
   def get_success_url(self):
     messages.info(self.request, 'Postを削除しました')
