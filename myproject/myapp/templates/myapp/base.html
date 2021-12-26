@@ -82,11 +82,34 @@
                     <hr class="dropdown-divider" />
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'myapp:post_list' %}">Post List</a>
+                    <a class="dropdown-item" href="{% url 'myapp:post_list' %}">List</a>
                   </li>
                 </ul>
               </li>
               
+              <!-- Navbar dropdown -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Category
+                </a>
+                <!-- Dropdown menu -->
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% comment %} <li>
+                    <a class="dropdown-item" href="{% url 'myapp:post_create' %}">Create New</a>
+                  </li> {% endcomment %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'myapp:category_list' %}">List</a>
+                  </li>
+                </ul>
+              </li>
+
               <!-- Navbar dropdown -->
               <li class="nav-item dropdown">
                 <a
