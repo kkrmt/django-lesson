@@ -11,6 +11,14 @@
       <div class="card-body">
         <h5 class="card-title">{{ object.title }}</h5>
         <p class="card-text">{{ object.content }}</p>
+        <a
+          type="button"
+          class="btn btn-outline-warning btn-floating"
+          data-mdb-ripple-color="dark"
+          href="{% url 'myapp:like_add' object.pk %}"
+        >
+          <i class="fas fa-star"></i>
+        </button>
         <a href="{% url 'myapp:post_update' object.id %}" class="btn btn-primary">Update</a>
         <a href="{% url 'myapp:post_delete' object.pk %}" class="btn btn-outline-danger">Delete</a>
       </div>
