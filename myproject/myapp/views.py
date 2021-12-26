@@ -7,7 +7,7 @@ from .forms import PostForm, LoginForm, SignUpForm
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class Index(TemplateView):
   template_name = 'myapp/index.html'
@@ -19,7 +19,7 @@ class Index(TemplateView):
       }
       return context
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
   model = Post
   form_class = PostForm
   success_url = reverse_lazy('myapp:index')
@@ -27,14 +27,14 @@ class PostCreate(CreateView):
 class PostDetail(DetailView):
   model = Post
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, UpdateView):
   model = Post
   form_class = PostForm
   def get_success_url(self):
     messages.info(self.request, 'Postを更新しました')
     return resolve_url('myapp:post_detail', pk=self.kwargs['pk'])
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
   model = Post
   def get_success_url(self):
     messages.info(self.request, 'Postを削除しました')
