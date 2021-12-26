@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 
 # 自分のPostかどうか
 class OnlyMyPostMixin(UserPassesTestMixin):
@@ -83,12 +84,19 @@ class SignUp(CreateView):
     # todo: ??
     return HttpResponseRedirect(self.get_success_url())
 
+@login_required
 def Like_add(request, post_id):
   post = Post.objects.get(id = post_id)
+  user = request.user
+  is_liked = Like.objects.filter(post = post, user = user).count() > 0
+  
+  if is_liked:
+    messages.warning(request, '既にお気に入り登録されています')
+    return redirect('myapp:post_detail', post.id)
+
   like = Like()
   like.user = request.user
   like.post = post
   like.save()
-  
-  messages.success(request, 'Likeしました')
+  messages.success(request, 'お気に入り登録しました')
   return redirect('myapp:post_detail', post.id)
