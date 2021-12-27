@@ -2,25 +2,27 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h2>カテゴリ一覧ページ</h2>
+    <h2>カテゴリ詳細ページ</h2>
     <br />
-    
+    <h5>{{ object.name }} の記事</h5>
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">名前</th>
-          <th scope="col">名前(英語)</th>
+          <th scope="col">タイトル</th>
+          <th scope="col">本文</th>
+          <th scope="col">著者</th>
           <th scope="col">作成日時</th>
           <th scope="col">更新日時</th>
         </tr>
       </thead>
       <tbody>
-        {% for item in category_list %}
-        <tr >
+        {% for item in category_posts %}
+        <tr>
           <th scope="row">{{ item.id }}</th>
-          <td><a href="{% url 'myapp:category_detail' item.name_en %}">{{ item.name }}</a></td>
-          <td>{{ item.name_en }}</td>
+          <td><a href="{% url 'myapp:post_detail' item.pk %}">{{ item.title }}</a></td>
+          <td>{{ item.content }}</td>
+          <td>{{ item.author }}</td>
           <td>{{ item.created_at }}</td>
           <td>{{ item.updated_at }}</td>
         </tr>

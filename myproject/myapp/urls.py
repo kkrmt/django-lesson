@@ -14,4 +14,5 @@ urlpatterns = [
     path('signup', views.SignUp.as_view(), name='signup'),
     path('like/<int:post_id>', views.Like_add, name='like_add'),
     path('category_list', views.CategoryList.as_view(), name='category_list'),
+    path('category_detail/<str:name_en>', views.CategoryDetail.as_view(), name='category_detail'),
 ]
