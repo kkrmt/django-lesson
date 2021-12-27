@@ -40,6 +40,16 @@ class PostCreate(LoginRequiredMixin, CreateView):
 
 class PostDetail(DetailView):
   model = Post
+  def get_context_data(self, **kwargs):
+    # context = super().get_context_data(**kwargs)
+    detail_data = Post.objects.get(id = self.kwargs['pk'])
+    category_posts = Post.objects.filter(category = detail_data.category).order_by('-created_at')[:5]
+    context = {
+      'object': detail_data,
+      'category_posts': category_posts,
+    }
+    return context
+  
 
 class PostUpdate(OnlyMyPostMixin, UpdateView):
   model = Post
