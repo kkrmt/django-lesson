@@ -134,16 +134,18 @@
                 </ul>
               </li>
             </ul>
-            <form class="d-flex input-group w-auto">
+            <form action="{% url 'myapp:search' %}" method="post" class="d-flex input-group w-auto">
+              {% csrf_token %}
               <input
                 type="search"
+                name="search_word"
                 class="form-control"
                 placeholder="Type query"
                 aria-label="Search"
               />
               <button
                 class="btn btn-outline-primary"
-                type="button"
+                type="submit"
                 data-mdb-ripple-color="dark"
               >
                 Search

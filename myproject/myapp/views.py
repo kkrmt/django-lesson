@@ -3,12 +3,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from .models import Post, Like, Category
 from django.urls import reverse_lazy
-from .forms import PostForm, LoginForm, SignUpForm
+from .forms import PostForm, LoginForm, SignUpForm, SearchForm
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # 自分のPostかどうか
 class OnlyMyPostMixin(UserPassesTestMixin):
@@ -131,4 +132,18 @@ class CategoryDetail(DetailView):
           'category_posts': category_posts,
         }
         return params
+
+def Search(request):
+  if request.method == 'POST':
+    search_form = SearchForm(request.POST)
+    if search_form.is_valid():
+      search_word = search_form.cleaned_data['search_word']
+      # OR検索
+      search_list = Post.objects.filter(Q(title__icontains = search_word)|Q(content__icontains = search_word))
+    
+    params = {
+      'search_word': search_word,
+      'search_list': search_list,
+    }
+    return render (request, 'myapp/search.html', params)
   

@@ -15,4 +15,5 @@ urlpatterns = [
     path('like/<int:post_id>', views.Like_add, name='like_add'),
     path('category_list', views.CategoryList.as_view(), name='category_list'),
     path('category_detail/<str:name_en>', views.CategoryDetail.as_view(), name='category_detail'),
+    path('search', views.Search, name='search'),
 ]
