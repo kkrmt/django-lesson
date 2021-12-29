@@ -20,7 +20,7 @@
       {% endif %}
       <div class="card-body">
         <h5 class="card-title">{{ item.title }}</h5>
-        <p class="card-text">{{ item.content | safe | linebreaksbr | truncatechars_html:12 }}</p>
+        <p class="card-text">{{ item.content | safe | truncatechars_html:12 }}</p>
       </div>
       <div class="card-footer">
         <small class="text-muted">Posted by {{ item.author }}</small>
