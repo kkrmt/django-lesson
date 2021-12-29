@@ -91,3 +91,5 @@ db.sqlite3
 # アップロード画像
 /myproject/media/images/*
 !/myproject/media/images/.gitkeep
+
+.idea

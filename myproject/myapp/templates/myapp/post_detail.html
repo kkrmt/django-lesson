@@ -18,7 +18,7 @@
       {% endif %}
       <div class="card-body">
         <h5 class="card-title">{{ object.title }}</h5>
-        <p class="card-text">{{ object.content }}</p>
+        <p class="card-text">{{ object.content | safe | linebreaksbr | urlize }}</p>
         <a
           type="button"
           class="btn btn-outline-warning btn-floating"
