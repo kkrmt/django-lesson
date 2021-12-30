@@ -133,11 +133,20 @@ def like_add(request, post_id):
     return redirect('myapp:post_detail', post.id)
 
 
-class CategoryList(ListView):
-    model = Category
+# class CategoryList(ListView):
+#     model = Category
+#
+#     def get_queryset(self):
+#         return Category.objects.all().order_by('id')
 
-    def get_queryset(self):
-        return Category.objects.all().order_by('id')
+
+# 関数ベースに書き換え
+def category_list(request):
+    params = {
+        'category_list': Category.objects.all().order_by('id'),
+    }
+
+    return render(request, 'myapp/category_list.html', params)
 
 
 class CategoryDetail(DetailView):
