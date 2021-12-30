@@ -79,10 +79,11 @@ class PostDelete(OnlyMyPostMixin, DeleteView):
 
 
 class PostList(ListView):
+    paginate_by = 4
     model = Post
 
     def get_queryset(self):
-        return Post.objects.all().order_by('-created_at')
+        return Post.objects.all().order_by('id')
 
 
 class Login(LoginView):
