@@ -1,34 +1,35 @@
 {% extends 'myapp/base.html' %}
 
 {% block content %}
-<!-- Jumbotron -->
-<div class="p-5 text-center bg-light" style="margin-top: 58px;">
-  <h1 class="mb-3">{{ request.site.siteconfig.top_title }}</h1>
-  <h4 class="mb-3">{{ request.site.siteconfig.top_subtitle }}</h4>
-</div>
-<!-- Jumbotron -->
+    <!-- Jumbotron -->
+    <div class="p-5 text-center bg-light" style="margin-top: 58px;">
+        <h1 class="mb-3">{{ request.site.siteconfig.top_title }}</h1>
+        <h4 class="mb-3">{{ request.site.siteconfig.top_subtitle }}</h4>
+    </div>
+    <!-- Jumbotron -->
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
 
-  {% for item in post_list %}
-  <div class="col">
-    <a class="card h-100" href="{% url 'myapp:post_detail' item.id %}">
-      {% if item.thumbnail %}
-        <img src="{{ item.thumbnail.url }}" class="card-img-top" alt="{{ item.title }}" />
-      {% else %}
-        <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top" alt="{{ item.title }}" />
-      {% endif %}
-      <div class="card-body">
-        <h5 class="card-title">{{ item.title }}</h5>
-        <p class="card-text">{{ item.content | safe | truncatechars_html:12 }}</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Posted by {{ item.author }}</small>
-        <small class="text-muted align-items-end">{{ item.category.name }}</small>
-      </div>
-    </a>
-  </div>
-  {% endfor %}
+        {% for item in post_list %}
+            <div class="col">
+                <a class="card h-100" href="{% url 'myapp:post_detail' item.id %}">
+                    {% if item.thumbnail %}
+                        <img src="{{ item.thumbnail.url }}" class="card-img-top" alt="{{ item.title }}"/>
+                    {% else %}
+                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top"
+                             alt="{{ item.title }}"/>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.content | safe | truncatechars_html:12 }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Posted by {{ item.author }}</small>
+                        <small class="text-muted align-items-end">{{ item.category.name }}</small>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
 
-</div>
+    </div>
 {% endblock %}
