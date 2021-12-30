@@ -116,7 +116,7 @@ class SignUp(CreateView):
 
 
 @login_required
-def Like_add(request, post_id):
+def like_add(request, post_id):
     post = Post.objects.get(id=post_id)
     user = request.user
     is_liked = Like.objects.filter(post=post, user=user).count() > 0
@@ -156,7 +156,7 @@ class CategoryDetail(DetailView):
         return params
 
 
-def Search(request):
+def search(request):
     if request.method == 'POST':
         search_form = SearchForm(request.POST)
         if search_form.is_valid():
