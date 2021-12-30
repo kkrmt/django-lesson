@@ -66,7 +66,7 @@
                         <a
                                 class="nav-link dropdown-toggle"
                                 href="#"
-                                id="navbarDropdown"
+                                id="navbarDropdownPost"
                                 role="button"
                                 data-mdb-toggle="dropdown"
                                 aria-expanded="false"
@@ -74,16 +74,10 @@
                             Post
                         </a>
                         <!-- Dropdown menu -->
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="{% url 'myapp:post_create' %}">Create New</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider"/>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{% url 'myapp:post_list' %}">List</a>
-                            </li>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownPost">
+                            <a class="dropdown-item" href="{% url 'myapp:post_create' %}">Create New</a>
+                            <hr class="dropdown-divider"/>
+                            <a class="dropdown-item" href="{% url 'myapp:post_list' %}">List</a>
                         </ul>
                     </li>
 
@@ -92,7 +86,7 @@
                         <a
                                 class="nav-link dropdown-toggle"
                                 href="#"
-                                id="navbarDropdown"
+                                id="navbarDropdownCategory"
                                 role="button"
                                 data-mdb-toggle="dropdown"
                                 aria-expanded="false"
@@ -100,14 +94,13 @@
                             Category
                         </a>
                         <!-- Dropdown menu -->
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {% comment %}
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'myapp:post_create' %}">Create New</a>
-                                </li> {% endcomment %}
-                            <li>
-                                <a class="dropdown-item" href="{% url 'myapp:category_list' %}">List</a>
-                            </li>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategory">
+                            <a class="dropdown-item" href="{% url 'myapp:category_list' %}">All</a>
+                            <hr/>
+                            {% for category in category_list %}
+                                <a class="dropdown-item"
+                                   href="{% url 'myapp:category_detail' category.name_en %}">{{ category.name }}</a>
+                            {% endfor %}
                         </ul>
                     </li>
 
