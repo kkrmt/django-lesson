@@ -26,7 +26,8 @@
           href="{% url 'myapp:like_add' object.pk %}"
         >
           <i class="fas fa-star"></i>
-        </button>
+        </a>
+        <a href="javascript:void(0);" onclick="window.history.back();" class="btn btn-outline-dark">Back</a>
         <a href="{% url 'myapp:post_update' object.id %}" class="btn btn-primary">Update</a>
         <a href="{% url 'myapp:post_delete' object.pk %}" class="btn btn-outline-danger">Delete</a>
       </div>
