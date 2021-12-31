@@ -1,2 +1,1 @@
-cd myproject
-web: gunicorn myproject.wsgi
+web: gunicorn .myproject/myproject.wsgi
