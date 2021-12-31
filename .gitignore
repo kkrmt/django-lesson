@@ -89,7 +89,7 @@ local_settings.py
 db.sqlite3
 
 # アップロード画像
-/myproject/media/images/*
+/media/images/.gitkeep
 !/myproject/media/images/.gitkeep
 
 .idea
