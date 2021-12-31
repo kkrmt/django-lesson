@@ -134,18 +134,7 @@ LOGIN_REDIRECT_URL = 'myapp:index'
 
 # メディアファイルの保存先
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
-
-# for AWS S3
-AWS_STORAGE_BUCKET_NAME = 'django-lesson-blog'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'media'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-
+MEDIA_URL = '/media/'
 
 # for heroku deploy --- start ---
 DATABASES['default'] = dj_database_url.config()
@@ -170,5 +159,12 @@ if not DEBUG:
     SECRET_KEY = os.environ['SECRET_KEY']
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    # for AWS S3
+    AWS_STORAGE_BUCKET_NAME = 'django-lesson-blog'
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}  # キャッシュは1日
+    AWS_LOCATION = 'media'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 
 # for heroku deploy --- end ---
