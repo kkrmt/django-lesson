@@ -93,3 +93,6 @@ db.sqlite3
 !/myproject/media/images/.gitkeep
 
 .idea
+
+# for herok deploy
+*.py[co]
